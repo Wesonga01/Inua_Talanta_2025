@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mysql = require("mysql2");
 const multer = require("multer");
@@ -9,10 +10,10 @@ const app = express();
 
 // DB Connection
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Urgine@65", // your password
-  database: "football_tournament",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
 });
 
 // Middlewares
