@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2025 INUA TALANTA Registration</title>
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      fieldset {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ccc;
+      }
+      .player-section {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px dashed #aaa;
+      }
+      .remove-btn {
+        color: red;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>2025 Inua Talanta Tournament Registration Form</h2>
+    <form action="/register" method="POST" enctype="multipart/form-data">
+      <!-- SECTION A: Team Info -->
+      <fieldset>
+        <legend>Section A: Team Information</legend>
+
+        <label>Team Name:</label>
+        <input type="text" name="team_name" required />
+
+        <label>County:</label>
+        <input type="text" name="county" required />
+
+        <label>Training Ground Name:</label>
+        <input type="text" name="training_ground" required />
+
+        <label>Coach Name:</label>
+        <input type="text" name="coach_name" required />
+
+        <label>Coach Telephone:</label>
+        <input type="tel" name="coach_phone" required />
+
+        <label>Coach Email:</label>
+        <input type="email" name="coach_email" required />
+
+        <label>Team Manager Name:</label>
+        <input type="text" name="manager_name" required />
+
+        <label>Team Manager Telephone:</label>
+        <input type="tel" name="manager_phone" required />
+
+        <label>Team Manager Email:</label>
+        <input type="email" name="manager_email" required />
+
+        <label>Age Category:</label>
+        <select name="age_category" required>
+          <option value="">-- Select Age Category --</option>
+          <option>Under 7</option>
+          <option>Under 9</option>
+          <option>Under 11</option>
+          <option>Under 13</option>
+          <option>Under 15</option>
+          <option>Under 17</option>
+          <option>Under 15 Girls</option>
+          <option>Girls</option>
+        </select>
+
+        <label>Home Jersey Colour:</label>
+        <input type="text" name="home_jersey" required />
+
+        <label>Away Jersey Colour:</label>
+        <input type="text" name="away_jersey" required />
+      </fieldset>
+
+      <!-- SECTION B: Player Info (dynamic) -->
+      <fieldset>
+        <legend>Section B: Player Information</legend>
+        <div id="players-container">
+          <!-- First player template -->
+          <div class="player-section">
+            <h4>Player 1</h4>
+
+            <label>Player Full Name:</label>
+            <input type="text" name="players[0][name]" required />
+
+            <label>Birth Certificate Number:</label>
+            <input type="text" name="players[0][birth_cert]" required />
+
+            <label>Date of Birth:</label>
+            <input type="date" name="players[0][dob]" required />
+
+            <label>Age (Years and Months):</label>
+            <input type="text" name="players[0][age]" required />
+
+            <label>Father’s Name:</label>
+            <input type="text" name="players[0][father]" required />
+
+            <label>School Name:</label>
+            <input type="text" name="players[0][school]" required />
+
+            <label>County of Birth:</label>
+            <input type="text" name="players[0][county_of_birth]" required />
+
+            <label>Sub-County of Residence:</label>
+            <input type="text" name="players[0][sub_county]" required />
+
+            <label>Passport Photo:</label>
+            <input
+              type="file"
+              name="players[0][photo]"
+              accept="image/*"
+              required
+            />
+
+            <label>Parent Contact:</label>
+            <input type="tel" name="players[0][parent_contact]" required />
+          </div>
+        </div>
+
+        <button type="button" onclick="addPlayer()">
+          ➕ Add Another Player
+        </button>
+      </fieldset>
+
+      <br />
+      <button type="submit">Submit Registration</button>
+    </form>
+
+    <script>
+      let playerCount = 1;
+
+      function addPlayer() {
+        const container = document.getElementById("players-container");
+        const newPlayer = container.firstElementChild.cloneNode(true);
+
+        playerCount++;
+
+        // Update all input names and labels
+        newPlayer.querySelector("h4").innerText = `Player ${playerCount}`;
+        newPlayer.querySelectorAll("input, select").forEach((input) => {
+          const name = input.name;
+          const updated = name.replace(/\[\d+\]/, `[${playerCount - 1}]`);
+          input.name = updated;
+          input.value = "";
+        });
+
+        container.appendChild(newPlayer);
+      }
+    </script>
+    <p style="text-align: right">
+      <a href="/admin" style="text-decoration: none; color: blue"
+        >Go to Admin Page</a
+      >
+    </p>
+  </body>
+</html>

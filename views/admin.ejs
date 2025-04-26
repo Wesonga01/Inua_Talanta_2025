@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard - 2025 Inua Talanta</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Admin Dashboard</h2>
+    <h3>Registered Teams</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Team Name</th>
+          <th>County</th>
+          <th>Age Category</th>
+          <th>Coach Name</th>
+          <th>Manager Name</th>
+          <th>Players</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% teams.forEach((teamData) => { %>
+          <tr>
+            <td><%= teamData.team.team_name %></td>
+            <td><%= teamData.team.county %></td>
+            <td><%= teamData.team.age_category %></td>
+            <td><%= teamData.team.coach_name %></td>
+            <td><%= teamData.team.manager_name %></td>
+            <td>
+              <ul>
+                <% teamData.players.forEach((player) => { %>
+                  <li><%= player.name %> (Age: <%= player.age %>, School: <%= player.school %>)</li>
+                <% }) %>
+              </ul>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
